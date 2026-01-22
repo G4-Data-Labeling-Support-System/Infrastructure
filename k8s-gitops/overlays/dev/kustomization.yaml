@@ -1,0 +1,5 @@
+resources:
+  - ../../base/back-end
+
+patchesStrategicMerge:
+  - patch-deployment.yaml

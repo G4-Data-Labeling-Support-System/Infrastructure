@@ -1,0 +1,51 @@
+###################
+# Deployment Object
+###################
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dls-be-deployment-dev
+spec:
+  selector:
+    matchLabels:
+      app: dls-be-dev
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: dls-be-dev
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: dls-be-dev
+          image: fleeforezz/dls-be:1.1-beta
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dls-secret
+                  key: DB_PASSWORD
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "512Mi"
+          volumeMounts:
+            - mountPath: /data/dls-backend
+              name: dls-storage
+            - mountPath: /config
+              name: dls-config
+      volumes:
+        - name: dls-storage
+          persistentVolumeClaim:
+            claimName: dls-pvc
+        - name: dls-config
+          configMap:
+            name: config
+            configMap:
+              name: dls-config
