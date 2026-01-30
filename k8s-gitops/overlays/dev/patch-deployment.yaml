@@ -3,4 +3,8 @@ kind: Deployment
 metadata:
   name: dls-be-deployment-dev
 spec:
-  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: dls-be-dev
+          image: fleeforezz/data-labeling-be:1.1-beta # <-Jenkins update this 

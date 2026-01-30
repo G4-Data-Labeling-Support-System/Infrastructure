@@ -5,23 +5,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dls-be-deployment-dev
+  name: dls-be-deployment
 spec:
   selector:
     matchLabels:
-      app: dls-be-dev
+      app: dls-be
   replicas: 2
   template:
     metadata:
       labels:
-        app: dls-be-dev
+        app: dls-be
     spec:
       automountServiceAccountToken: false
       containers:
-        - name: dls-be-dev
-          image: fleeforezz/dls-be:1.1-beta
+        - name: dls-be
+          image: fleeforezz/dls-be:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
           env:
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
@@ -46,6 +46,4 @@ spec:
             claimName: dls-pvc
         - name: dls-config
           configMap:
-            name: config
-            configMap:
-              name: dls-config
+            name: dls-config

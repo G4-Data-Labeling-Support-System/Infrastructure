@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: dls-be-deployment-prod
+spec:
+  template:
+    spec:
+      containers:
+        - name: dls-be-prod
+          image: fleeforezz/data-labeling-be:latest # <-Jenkins update this 
