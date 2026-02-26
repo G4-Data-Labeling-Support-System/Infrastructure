@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - name: dls-be-dev
-          image: fleeforezz/data-labeling-be:1.1.36-beta # <-Jenkins update this 
+          image: fleeforezz/data-labeling-be:1.1.37-beta # <-Jenkins update this 
